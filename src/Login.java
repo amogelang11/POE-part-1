@@ -57,7 +57,7 @@ public class Login {
         return hasUpperCase && hasNumber && hasSpecialChar;
     }
     
-    // Check cell phone number format using regex
+    // Check cellphone number format using regex
     // AI Tool Reference: OpenAI. (2025). ChatGPT (September version) [Large language model]. https://chat.openai.com
     public boolean checkCellPhoneNumber(String cellPhoneNumber) {
         // South African numbers: +27 followed by 9 digits (total 12 characters)
