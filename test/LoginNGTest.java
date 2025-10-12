@@ -29,9 +29,7 @@ public class LoginNGTest {
         login = null;
     }
 
-    /**
-     * Test of checkUserName method, of class Login.
-     */
+  
     @Test
     public void testCheckUserName_CorrectlyFormatted() {
         System.out.println("Username correctly formatted");
@@ -48,9 +46,7 @@ public class LoginNGTest {
         assertFalse(result);
     }
 
-    /**
-     * Test of checkPasswordComplexity method, of class Login.
-     */
+    
     @Test
     public void testCheckPasswordComplexity_MeetsRequirements() {
         System.out.println("Password meets complexity requirements");
@@ -67,9 +63,7 @@ public class LoginNGTest {
         assertFalse(result);
     }
 
-    /**
-     * Test of checkCellPhoneNumber method, of class Login.
-     */
+    
     @Test
     public void testCheckCellPhoneNumber_CorrectlyFormatted() {
         System.out.println("Cell phone number correctly formatted");
@@ -86,9 +80,7 @@ public class LoginNGTest {
         assertFalse(result);
     }
 
-    /**
-     * Test of loginUser method, of class Login.
-     */
+    
     @Test
     public void testLoginUser_Successful() {
         System.out.println("Login Successful");
@@ -109,9 +101,7 @@ public class LoginNGTest {
         assertFalse(result);
     }
 
-    /**
-     * Test of returnLoginStatus method, of class Login.
-     */
+  
     @Test
     public void testReturnLoginStatus_Successful() {
         System.out.println("returnLoginStatus - successful login message");
