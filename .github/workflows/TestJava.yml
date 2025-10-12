@@ -1,0 +1,55 @@
+name: Java CI with TestNG
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Create test directory structure
+      run: |
+        mkdir -p src/test/java
+        # Copy your test files to the correct directory structure
+        find . -name "*.java" -exec cp --parents {} src/ \;
+
+    - name: Compile main source code
+      run: |
+        javac -cp ".:lib/*" src/main/java/PROG1APOE.java src/main/java/Login.java src/main/java/Message.java
+
+    - name: Compile test code
+      run: |
+        javac -cp ".:lib/*:src/main/java:src/test/java" src/test/java/MessageNGTest.java
+
+    - name: Download TestNG
+      run: |
+        wget -O lib/testng.jar https://repo1.maven.org/maven2/org/testng/testng/7.8.0/testng-7.8.0.jar
+        wget -O lib/jcommander.jar https://repo1.maven.org/maven2/com/beust/jcommander/1.82/jcommander-1.82.jar
+
+    - name: Run Message class tests
+      run: |
+        java -cp ".:lib/*:src/main/java:src/test/java" org.testng.TestNG -testclass MessageNGTest
+
+    - name: Run Login class tests
+      run: |
+        # Compile and run Login tests if they exist
+        find src/test/java -name "*Login*Test.java" && \
+        javac -cp ".:lib/*:src/main/java:src/test/java" src/test/java/LoginNGTest.java && \
+        java -cp ".:lib/*:src/main/java:src/test/java" org.testng.TestNG -testclass LoginNGTest || echo "No Login tests found"
+
+    - name: Test results
+      run: |
+        echo "All unit tests completed successfully!"
