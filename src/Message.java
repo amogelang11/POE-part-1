@@ -95,7 +95,7 @@ public class Message {
     
     // Method to handle sending message with options
     public String sentMessage() {
-        String[] options = {"Send Message", "Disregard Message", "Store Message to send later"};
+        String[] options = {"Send Message", "Disregard Message", "Store Message"};
         int choice = JOptionPane.showOptionDialog(
             null,
             "Choose an option for the message:",
@@ -119,7 +119,7 @@ public class Message {
                 
             case 2: // Store Message to send later
                 storeMessage();
-                return "Message stored for later.";
+                return "Message stored.";
                 
             default:
                 return "Operation cancelled.";
