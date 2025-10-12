@@ -53,9 +53,7 @@ public class MessageNGTest {
         }
     }
 
-    /**
-     * Test message length validation - Success case
-     */
+   
     @Test
     public void testMessageLength_Success() {
         System.out.println("testMessageLength_Success");
@@ -87,9 +85,7 @@ public class MessageNGTest {
         System.out.println("Message exceeds 250 characters by " + excessChars + ", please reduce size.");
     }
 
-    /**
-     * Test recipient number format - Success case
-     */
+   
     @Test
     public void testCheckRecipientCell_Success() {
         System.out.println("checkRecipientCell - Success");
@@ -102,9 +98,7 @@ public class MessageNGTest {
         System.out.println("Cell phone number successfully captured.");
     }
     
-    /**
-     * Test recipient number format - Failure case
-     */
+    
     @Test
     public void testCheckRecipientCell_Failure() {
         System.out.println("checkRecipientCell - Failure");
@@ -117,9 +111,7 @@ public class MessageNGTest {
         System.out.println("Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.");
     }
 
-    /**
-     * Test message hash generation
-     */
+   
     @Test
     public void testCreateMessageHash() {
         System.out.println("createMessageHash");
@@ -139,9 +131,7 @@ public class MessageNGTest {
         System.out.println("Message hash is correct: " + hash1);
     }
 
-    /**
-     * Test message ID generation
-     */
+  
     @Test
     public void testCheckMessageID() {
         System.out.println("checkMessageID");
@@ -209,21 +199,19 @@ public class MessageNGTest {
         System.out.println("Message successfully stored.");
     }
 
-    /**
-     * Test returnTotalMessages method
-     */
+   
     @Test
     public void testReturnTotalMessages() {
         System.out.println("returnTotalMessages");
         
-        // Test Data 1: Send first message
+        
         Message testMessage1 = new Message("+27718693002", "Hi Mike, can you join us for dinner tonight");
         simulateSentMessageOption(0); // Send
         
         int totalAfterFirst = message.returnTotalMessages();
         assertEquals(totalAfterFirst, 1, "Total should be 1 after first message");
         
-        // Test Data 2: Try to send second message but discard
+        
         Message testMessage2 = new Message("08575975889", "Hi Keegan, did you receive the payment?");
         simulateSentMessageOption(1); // Discard
         
@@ -233,9 +221,7 @@ public class MessageNGTest {
         System.out.println("Return total number sent: " + totalAfterSecond);
     }
 
-    /**
-     * Test the complete flow with exact test data from screenshots
-     */
+    
     @Test
     public void testCompleteFlowWithTestData() {
         System.out.println("testCompleteFlowWithTestData");
@@ -303,7 +289,7 @@ public class MessageNGTest {
                 return "Message disregarded.";
                 
             case 2: // Store Message to send later
-                // For testing, we'll just return the success message
+                
                 return "Message stored for later.";
                 
             default:

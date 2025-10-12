@@ -93,7 +93,7 @@ public class Message {
         return hash.toUpperCase();
     }
     
-    // Method to handle sending message with options
+   
     public String sentMessage() {
         String[] options = {"Send Message", "Disregard Message", "Store Message"};
         int choice = JOptionPane.showOptionDialog(
@@ -117,7 +117,7 @@ public class Message {
             case 1: // Disregard Message
                 return "Message disregarded.";
                 
-            case 2: // Store Message to send later
+            case 2: // Store Message
                 storeMessage();
                 return "Message stored.";
                 
@@ -126,7 +126,7 @@ public class Message {
         }
     }
     
-    // Method to display message details using JOptionPane
+    // Method to display message details 
     private void displayMessageDetails() {
         String details = "Message Details:\n\n" +
                         "Message ID: " + messageID + "\n" +
@@ -138,14 +138,14 @@ public class Message {
         JOptionPane.showMessageDialog(null, details, "Message Sent", JOptionPane.INFORMATION_MESSAGE);
     }
     
-    // Method to return list of all sent messages
+    
     public String printMessages() {
         if (sentMessages.isEmpty()) {
             return "No messages sent yet.";
         }
         
         StringBuilder sb = new StringBuilder();
-        sb.append("All Sent Messages:\n\n");
+        sb.append("Sent Messages:\n\n");
         
         for (int i = 0; i < sentMessages.size(); i++) {
             Message msg = sentMessages.get(i);
@@ -167,7 +167,7 @@ public class Message {
     // Method to store message in JSON file
     public void storeMessage() {
         try {
-            // Create JSON object for the message
+            // Creating JSON object
             JSONObject messageJson = new JSONObject();
             messageJson.put("messageID", this.messageID);
             messageJson.put("recipient", this.recipient);

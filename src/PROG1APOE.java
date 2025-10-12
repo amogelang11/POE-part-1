@@ -7,6 +7,10 @@
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author ICT 2022
+ */
 
 
 public class PROG1APOE {
@@ -135,7 +139,7 @@ public class PROG1APOE {
             // Get recipient
             String recipient = JOptionPane.showInputDialog("Enter recipient cell number (with international code, e.g., +27123456789):\n\nMessages remaining: " + (maxMessages - i));
             if (recipient == null) {
-                // User cancelled, return to main menu
+                
                 return;
             }
             
@@ -143,27 +147,27 @@ public class PROG1APOE {
             Message tempMessage = new Message(recipient, "");
             if (tempMessage.checkRecipientCell() != 0) {
                 JOptionPane.showMessageDialog(null, "Invalid recipient format. Please ensure the number starts with international code and has no more than 10 digits.", "Invalid Recipient", JOptionPane.ERROR_MESSAGE);
-                i--; // Retry this message
+                i--; 
                 continue;
             }
             
             // Get message text
             String messageText = JOptionPane.showInputDialog("Enter your message (max 250 characters):\n\nMessages remaining: " + (maxMessages - i));
             if (messageText == null) {
-                // User cancelled, return to main menu
+                
                 return;
             }
             
             // Validate message length
             if (messageText.length() > 250) {
                 JOptionPane.showMessageDialog(null, "Please enter a message of less than 250 characters.", "Message Too Long", JOptionPane.ERROR_MESSAGE);
-                i--; // Retry this message
+                i--; 
                 continue;
             }
             
             if (messageText.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Message cannot be empty.", "Empty Message", JOptionPane.ERROR_MESSAGE);
-                i--; // Retry this message
+                i--; 
                 continue;
             }
             
@@ -175,7 +179,7 @@ public class PROG1APOE {
                 messagesSent++;
             }
             
-            // Ask if user wants to send more messages (if not reached limit)
+            // Ask if user wants to send more messages
             if (i < maxMessages - 1) {
                 int continueOption = JOptionPane.showConfirmDialog(null, 
                     "Do you want to send another message?\n\nMessages sent: " + (messagesSent) + "\nMessages remaining: " + (maxMessages - i - 1), 
