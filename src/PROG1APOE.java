@@ -27,7 +27,7 @@ public class PROG1APOE {
             System.out.println("3. Exit");
             
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine(); //  newline
             
             switch (choice) {
                 case 1:
@@ -90,7 +90,7 @@ public class PROG1APOE {
                 continue;
             }
             
-            // Show numeric menu
+            // Show menu
             String menu = "QuickChat Menu:\n\n" +
                          "1) Send Messages\n" +
                          "2) Show recently sent messages\n" +
@@ -100,7 +100,7 @@ public class PROG1APOE {
             String choiceStr = JOptionPane.showInputDialog(menu);
             
             if (choiceStr == null) {
-                // User closed the dialog
+                // User is quitting
                 quit = true;
                 continue;
             }
