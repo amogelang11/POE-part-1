@@ -29,9 +29,7 @@ public class MessageManager {
     private MessageManager() {}
     
    
-    /**
-     * Add a message to sent messages array
-     */
+   
     public static void addToSentMessages(Message message) {
         if (message != null) {
             sentMessages.add(message);
@@ -39,9 +37,7 @@ public class MessageManager {
         }
     }
     
-    /**
-     * Add a message to disregarded messages array
-     */
+    
     public static void addToDisregardedMessages(Message message) {
         if (message != null) {
             disregardedMessages.add(message);
@@ -59,7 +55,7 @@ public class MessageManager {
         }
     }
     
-    /**
+   /**
      * Add message to ID and Hash arrays
      */
     private static void addToMessageArrays(Message message) {
@@ -71,9 +67,7 @@ public class MessageManager {
         }
     }
     
-    /**
-     * Load stored messages from JSON file into storedMessages array
-     */
+    
     public static void loadStoredMessagesFromJSON() {
         try {
             String content = new String(Files.readAllBytes(Paths.get("stored_messages.json")));

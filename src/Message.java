@@ -40,7 +40,7 @@ public class Message {
         this.messageText = messageText;
         this.messageHash = createMessageHash();
         
-        // Add to ID and Hash arrays
+      
         messageIDArray.add(this.messageID);
         messageHashArray.add(this.messageHash);
     }
