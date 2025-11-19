@@ -14,7 +14,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ *
+ * @author RC_Student_Lab
+ */
 public class Message {
     private String messageID;
     private String recipient;

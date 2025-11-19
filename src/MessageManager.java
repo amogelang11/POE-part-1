@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author ICT 2022
+ * @author RC_Student_Lab
  */
 public class MessageManager {
     // Arrays as specified in requirements

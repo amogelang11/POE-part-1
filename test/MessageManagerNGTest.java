@@ -9,7 +9,7 @@ import org.testng.annotations.AfterMethod;
 import java.util.List;
 /**
  *
- * @author ICT 2022
+ * @author RC_Student_Lab
  */
 public class MessageManagerNGTest {
     
