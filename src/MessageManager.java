@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-/**
- *
- * @author ICT 2022
- */
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.FileWriter;
@@ -17,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * MessageManager class to handle all array operations for messages
+ *
+ * @author ICT 2022
  */
 public class MessageManager {
     // Arrays as specified in requirements
