@@ -62,76 +62,156 @@ public class PROG1APOE {
         
         scanner.close();
     }
-    
     private static void showMessagingMenu(Scanner scanner) {
-        // Display welcome message
-        JOptionPane.showMessageDialog(null, "Welcome to QuickChat.", "QuickChat", JOptionPane.INFORMATION_MESSAGE);
-        
-        boolean quit = false;
-        int maxMessages = 0;
-        boolean messagesLimitSet = false;
-        
-        while (!quit) {
-            
-            if (!messagesLimitSet) {
-                String maxMessagesInput = JOptionPane.showInputDialog("How many messages do you wish to enter?");
-                if (maxMessagesInput == null) {
-                    
-                    quit = true;
-                    continue;
-                }
-                
-                try {
-                    maxMessages = Integer.parseInt(maxMessagesInput);
-                    if (maxMessages > 0) {
-                        messagesLimitSet = true;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Please enter a positive number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-                    }
-                } catch (NumberFormatException e) {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-                }
-                continue;
-            }
-            
-            // Show menu
-            String menu = "QuickChat Menu:\n\n" +
-                         "1) Send Messages\n" +
-                         "2) Show recently sent messages\n" +
-                         "3) Quit\n\n" +
-                         "Please select an option:";
-            
-            String choiceStr = JOptionPane.showInputDialog(menu);
-            
-            if (choiceStr == null) {
-                // User is quitting
+    JOptionPane.showMessageDialog(null, "Welcome to QuickChat.", "QuickChat", JOptionPane.INFORMATION_MESSAGE);
+    
+    boolean quit = false;
+    int maxMessages = 0;
+    boolean messagesLimitSet = false;
+    
+    while (!quit) {
+        if (!messagesLimitSet) {
+            String maxMessagesInput = JOptionPane.showInputDialog("How many messages do you wish to enter?");
+            if (maxMessagesInput == null) {
                 quit = true;
                 continue;
             }
             
             try {
-                int choice = Integer.parseInt(choiceStr);
-                
-                switch (choice) {
-                    case 1:
-                        sendMessages(scanner, maxMessages);
-                        break;
-                    case 2:
-                        JOptionPane.showMessageDialog(null, "Coming Soon.", "Feature in Development", JOptionPane.INFORMATION_MESSAGE);
-                        break;
-                    case 3:
-                        quit = true;
-                        JOptionPane.showMessageDialog(null, "Thank you for using QuickChat. Goodbye!", "Goodbye", JOptionPane.INFORMATION_MESSAGE);
-                        break;
-                    default:
-                        JOptionPane.showMessageDialog(null, "Invalid option. Please select 1, 2, or 3.", "Invalid Choice", JOptionPane.ERROR_MESSAGE);
+                maxMessages = Integer.parseInt(maxMessagesInput);
+                if (maxMessages > 0) {
+                    messagesLimitSet = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please enter a positive number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Please enter a valid number (1, 2, or 3).", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please enter a valid number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }
+            continue;
+        }
+        
+    
+        String menu = "QuickChat Menu:\n\n" +
+                     "1) Send Messages\n" +
+                     "2) Show Recently Sent Messages & Part 3 Operations\n" +
+                     "3) Quit\n\n" +
+                     "Please select an option:";
+        
+        String choiceStr = JOptionPane.showInputDialog(menu);
+        
+        if (choiceStr == null) {
+            quit = true;
+            continue;
+        }
+        
+        try {
+            int choice = Integer.parseInt(choiceStr);
+            
+            switch (choice) {
+                case 1:
+                    sendMessages(scanner, maxMessages);
+                    break;
+                case 2:
+                    showRecentlySentMessagesMenu(scanner);
+                    break;
+                case 3:
+                    quit = true;
+                    JOptionPane.showMessageDialog(null, "Thank you for using QuickChat. Goodbye!", "Goodbye", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Invalid option. Please select 1-3.", "Invalid Choice", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid number (1-3).", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }
     }
+}
+    private static void showRecentlySentMessagesMenu(Scanner scanner) {
+    // Load stored messages from JSON file
+    Message.loadStoredMessages();
     
+    boolean backToMain = false;
+    
+    while (!backToMain) {
+        String menu = "RECENTLY SENT MESSAGES & Part 3 Operations\n\n" +
+                     "1. Show Recently Sent Messages\n" +
+                     "2. Display sender and recipient of all sent messages\n" +
+                     "3. Display the longest sent message\n" +
+                     "4. Search for message by ID\n" +
+                     "5. Search messages by recipient\n" +
+                     "6. Delete message by hash\n" +
+                     "7. Display full report of all sent messages\n" +
+                     "8. Back to main menu\n\n" +
+                     "Please select an option:";
+        
+        String choiceStr = JOptionPane.showInputDialog(menu);
+        
+        if (choiceStr == null) {
+            backToMain = true;
+            continue;
+        }
+        
+        try {
+            int choice = Integer.parseInt(choiceStr);
+            
+            switch (choice) {
+                case 1:
+    // Show recently sent messages 
+                    String recentMessages = Message.printMessages();
+                    JOptionPane.showMessageDialog(null, recentMessages, "Recently Sent Messages", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                    
+                case 2:
+                    String result1 = Message.displaySentMessagesSendersRecipients();
+                    JOptionPane.showMessageDialog(null, result1, "Sent Messages", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                    
+                case 3:
+                    String result2 = Message.displayLongestSentMessage();
+                    JOptionPane.showMessageDialog(null, result2, "Longest Message", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                    
+                case 4:
+                    String searchID = JOptionPane.showInputDialog("Enter Message ID to search:");
+                    if (searchID != null && !searchID.trim().isEmpty()) {
+                        String result3 = Message.searchMessageByID(searchID.trim());
+                        JOptionPane.showMessageDialog(null, result3, "Message Search", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    break;
+                    
+                case 5:
+                    String recipient = JOptionPane.showInputDialog("Enter recipient number to search:");
+                    if (recipient != null && !recipient.trim().isEmpty()) {
+                        String result4 = Message.searchMessagesByRecipient(recipient.trim());
+                        JOptionPane.showMessageDialog(null, result4, "Recipient Search", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    break;
+                    
+                case 6:
+                    String hash = JOptionPane.showInputDialog("Enter message hash to delete:");
+                    if (hash != null && !hash.trim().isEmpty()) {
+                        String result5 = Message.deleteMessageByHash(hash.trim());
+                        JOptionPane.showMessageDialog(null, result5, "Delete Message", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    break;
+                    
+                case 7:
+                    String result6 = Message.displayFullReport();
+                    JOptionPane.showMessageDialog(null, result6, "Full Message Report", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                    
+                case 8:
+                    backToMain = true;
+                    break;
+                    
+                default:
+                    JOptionPane.showMessageDialog(null, "Invalid option. Please select 1-8.", "Invalid Choice", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid number (1-8).", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
     private static void sendMessages(Scanner scanner, int maxMessages) {
         int messagesSent = 0;
         
@@ -280,4 +360,84 @@ public class PROG1APOE {
         }
         return false;
     }
+
+ private static void showArrayOperationsMenu(Scanner scanner) {
+    // Load stored messages from JSON file
+    Message.loadStoredMessages();
+    
+    boolean backToMain = false;
+    
+    while (!backToMain) {
+        String menu = "ARRAY OPERATIONS MENU\n\n" +
+                     "1. Display sender and recipient of all sent messages\n" +
+                     "2. Display the longest sent message\n" +
+                     "3. Search for message by ID\n" +
+                     "4. Search messages by recipient\n" +
+                     "5. Delete message by hash\n" +
+                     "6. Display full report of all sent messages\n" +
+                     "7. Back to main menu\n\n" +
+                     "Please select an option:";
+        
+        String choiceStr = JOptionPane.showInputDialog(menu);
+        
+        if (choiceStr == null) {
+            backToMain = true;
+            continue;
+        }
+        
+        try {
+            int choice = Integer.parseInt(choiceStr);
+            
+            switch (choice) {
+                case 1:
+                    String result1 = Message.displaySentMessagesSendersRecipients();
+                    JOptionPane.showMessageDialog(null, result1, "Sent Messages", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                    
+                case 2:
+                    String result2 = Message.displayLongestSentMessage();
+                    JOptionPane.showMessageDialog(null, result2, "Longest Message", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                    
+                case 3:
+                    String searchID = JOptionPane.showInputDialog("Enter Message ID to search:");
+                    if (searchID != null && !searchID.trim().isEmpty()) {
+                        String result3 = Message.searchMessageByID(searchID.trim());
+                        JOptionPane.showMessageDialog(null, result3, "Message Search", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    break;
+                    
+                case 4:
+                    String recipient = JOptionPane.showInputDialog("Enter recipient number to search:");
+                    if (recipient != null && !recipient.trim().isEmpty()) {
+                        String result4 = Message.searchMessagesByRecipient(recipient.trim());
+                        JOptionPane.showMessageDialog(null, result4, "Recipient Search", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    break;
+                    
+                case 5:
+                    String hash = JOptionPane.showInputDialog("Enter message hash to delete:");
+                    if (hash != null && !hash.trim().isEmpty()) {
+                        String result5 = Message.deleteMessageByHash(hash.trim());
+                        JOptionPane.showMessageDialog(null, result5, "Delete Message", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    break;
+                    
+                case 6:
+                    String result6 = Message.displayFullReport();
+                    JOptionPane.showMessageDialog(null, result6, "Full Message Report", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                    
+                case 7:
+                    backToMain = true;
+                    break;
+                    
+                default:
+                    JOptionPane.showMessageDialog(null, "Invalid option. Please select 1-7.", "Invalid Choice", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid number (1-7).", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
 }
