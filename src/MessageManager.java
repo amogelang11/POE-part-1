@@ -45,9 +45,7 @@ public class MessageManager {
         }
     }
     
-    /**
-     * Add a message to stored messages array
-     */
+    
     public static void addToStoredMessages(Message message) {
         if (message != null) {
             storedMessages.add(message);
@@ -55,9 +53,7 @@ public class MessageManager {
         }
     }
     
-   /**
-     * Add message to ID and Hash arrays
-     */
+ 
     private static void addToMessageArrays(Message message) {
         if (message.getMessageID() != null && !messageIDArray.contains(message.getMessageID())) {
             messageIDArray.add(message.getMessageID());
